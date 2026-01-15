@@ -8,7 +8,7 @@ use DevCoding\Reflection\Helper\ArrayFirstTrait;
  * Group of Tag objects. Tags that implement NamedTagInterface are added with their name as the key; other tag types
  * are added with an index key. Typically, the two are not mixed in the same TagGroup.
  *
- * @method Tag|ParamTag|MethodTag|PropertyTag offsetGet($key)
+ * @method ReflectionTag|ReflectionMethodTag|ReflectionParamTag|ReflectionPropertyTag offsetGet($key)
  *
  * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  * @author  AMJones <am@jonesiscoding.com>
@@ -18,7 +18,7 @@ class TagGroup extends \ArrayIterator
   use ArrayFirstTrait;
 
   /**
-   * @param ReflectionTag[]       $tags  Tags in Group
+   * @param ReflectionTag[]|ReflectionMethodTag[]|ReflectionParamTag[]|ReflectionPropertyTag[] $tags  Tags in Group
    */
   public function __construct(array $tags)
   {
@@ -32,7 +32,7 @@ class TagGroup extends \ArrayIterator
   }
 
   /**
-   * @param ReflectionTag $value
+   * @param ReflectionTag|ReflectionMethodTag|ReflectionParamTag|ReflectionPropertyTag $value
    *
    * @return void
    */
@@ -52,9 +52,9 @@ class TagGroup extends \ArrayIterator
   }
 
   /**
-   * @return Tag
+   * @return ReflectionTag|ReflectionMethodTag|ReflectionParamTag|ReflectionPropertyTag
    */
-  public function first(): Tag
+  public function first(): ReflectionTag
   {
     return $this->array_first($this->getArrayCopy());
   }
