@@ -6,7 +6,7 @@ namespace DevCoding\Reflection\Vars;
  * Reflection-style class representing a 'string' RelectionNamedVar with specific choices.
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class ReflectionEnumVar extends ReflectionNamedVar
 {

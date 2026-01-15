@@ -9,6 +9,9 @@ use DevCoding\Reflection\Helper\ArrayFirstTrait;
  * are added with an index key. Typically, the two are not mixed in the same TagGroup.
  *
  * @method Tag|ParamTag|MethodTag|PropertyTag offsetGet($key)
+ *
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
+ * @author  AMJones <am@jonesiscoding.com>
  */
 class TagGroup extends \ArrayIterator
 {

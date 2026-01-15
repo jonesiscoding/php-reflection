@@ -9,7 +9,7 @@ use DevCoding\Reflection\Vars\ReflectionVar;
  * Reflection-style class for manipulation of a name from a class, property, parameter, or function.
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class ReflectionName
 {

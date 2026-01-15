@@ -6,7 +6,7 @@ namespace DevCoding\Reflection\Bags;
  * Containers for all constraints from a ReflectionMethod, ReflectionProperty, ReflectionClass, or ReflectionFunction.
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class ConstraintBag implements \Psr\Container\ContainerInterface
 {

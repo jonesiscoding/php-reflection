@@ -8,7 +8,7 @@ use DevCoding\Reflection\Vars\ReflectionVar;
  * Reflection style class providing accessibility to a RefelctionProperty through a getter, setter, or directly.
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class ReflectionAccess
 {

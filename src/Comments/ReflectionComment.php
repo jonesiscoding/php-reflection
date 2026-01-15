@@ -12,7 +12,7 @@ use DevCoding\Reflection\Tags\TagCollection;
  * Reflection-style object representing the DocComment of a Reflector
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class ReflectionComment
 {

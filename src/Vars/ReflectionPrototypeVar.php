@@ -6,7 +6,7 @@ namespace DevCoding\Reflection\Vars;
  * Extends ReflectionNamedVar to represent an array of the named type.
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class ReflectionPrototypeVar extends ReflectionNamedVar
 {

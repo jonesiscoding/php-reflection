@@ -12,7 +12,7 @@ use DevCoding\Reflection\ReflectionClassImports;
  * ReflectionFunction, or magic methods or properties.
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class ReflectionNamedVar extends ReflectionVar
 {

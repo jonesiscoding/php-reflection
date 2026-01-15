@@ -11,7 +11,7 @@ use DevCoding\Reflection\RelfectionVar;
  * Instantiation typically happens via the static methods in ReflectionVar, allowing creation from a ReflectionProperty,
  * ReflectionFunction, or magic methods or properties.
  *
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  * @author  AMJones <am@jonesiscoding.com>
  */
 class ReflectionUnionVar extends ReflectionVar

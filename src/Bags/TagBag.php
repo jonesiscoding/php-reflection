@@ -10,7 +10,7 @@ use Psr\Container\ContainerInterface;
  * Container for ReflectionTag objects
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class TagBag implements ContainerInterface
 {

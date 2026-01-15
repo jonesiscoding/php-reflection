@@ -9,7 +9,7 @@ use DevCoding\Reflection\Helper\StringEndsWithTrait;
  * short class names, as used in most PHPdocs.
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class ReflectionClassImports
 {

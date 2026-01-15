@@ -10,7 +10,7 @@ use DevCoding\Reflection\Vars\ReflectionVar;
  * Reflection-style class representing a class constructor, for use in the autowiring of class objects.
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class ReflectionConstructor extends ReflectionTag
 {

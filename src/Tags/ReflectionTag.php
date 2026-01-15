@@ -13,11 +13,15 @@ use DevCoding\Reflection\Vars\ReflectionVar;
 /**
  * Reflection style object containing data from a parsed PHPdoc tag.
  *
- * @property string|null          $description   Freeform description text
- * @property string|null          $name          Name of parameter or variable, if present
- * @property string|null          $tag           Name of the tag
- * @property ReflectionVar|null   $type          Type of property or parameter, return type of method
- * @property TagBag|null $params                 Array of parameters from a method
+ * @property string|null        $tag          Name of the tag
+ * @property ReflectionVar|null $type         Type of property or parameter, return type of method
+ * @property TagBag|null        $params       Array of parameters from a method
+ *
+ * @property string|null        $description  Freeform description text
+ * @property string|null        $name         Name of parameter or variable, if present
+ *
+ * @author  AMJones <am@jonesiscoding.com>
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class ReflectionTag extends \ArrayIterator
 {

@@ -4,6 +4,7 @@ namespace DevCoding\Reflection\Tags;
 
 /**
  * @author  AMJones <am@jonesiscoding.com>
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class ReflectionPropertyTag extends ReflectionTag implements NamedTagInterface
 {

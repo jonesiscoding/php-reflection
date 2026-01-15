@@ -9,7 +9,7 @@ use Psr\Container\ContainerInterface;
  * Container containing ReflectionAccess objects for each ReflectionProperty in a ReflectionClass
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class AccessBag implements ContainerInterface
 {

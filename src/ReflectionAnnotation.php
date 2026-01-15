@@ -6,7 +6,7 @@ namespace DevCoding\Reflection;
  * Reflection-style class for access to an annotation of a ReflectionClass, ReflectionProperty, or ReflectionMethod
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class ReflectionAnnotation
 {

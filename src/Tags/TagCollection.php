@@ -22,6 +22,9 @@ use DevCoding\Reflection\Bags\TagBag;
  * @property ReflectionTag|null                  $summary
  * @property ReflectionTag|null                  $description
  * @property ReflectionTag|null                  $var
+ *
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
+ * @author  AMJones <am@jonesiscoding.com>
  */
 class TagCollection extends \ArrayIterator
 {

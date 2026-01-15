@@ -11,7 +11,7 @@ use Psr\Container\ContainerInterface;
  * Containers for all annotations from a ReflectionMethod, ReflectionProperty, ReflectionClass, or ReflectionFunction.
  *
  * @author  AMJones <am@jonesiscoding.com>
- * @license https://github.com/jonesiscoding/php-relfection/blob/main/LICENSE
+ * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
 class AnnotationBag implements ContainerInterface
 {
