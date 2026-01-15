@@ -2,7 +2,7 @@
 
 namespace DevCoding\Reflection\Bags;
 
-use DevCoding\ReflectionAccess;
+use DevCoding\Reflection\ReflectionAccess;
 use Psr\Container\ContainerInterface;
 
 /**
