@@ -4,7 +4,7 @@ namespace DevCoding\Reflection\Bags;
 
 use DevCoding\Reflection\Doctrine;
 use DevCoding\Reflection\Helper\ArrayFirstTrait;
-use DevCoding\ReflectionAnnotation;
+use DevCoding\Reflection\ReflectionAnnotation;
 use Psr\Container\ContainerInterface;
 
 /**
