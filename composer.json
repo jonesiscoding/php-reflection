@@ -20,7 +20,7 @@
             "DevCoding\\Reflection\\Vars\\": "src/Vars"
         }
     },
-    "version": "1.0",
+    "version": "1.70",
     "config": {
         "platform": {
             "php": "7.0.33"
