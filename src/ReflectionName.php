@@ -23,6 +23,7 @@ class ReflectionName
 
   /** @var \ReflectionFunctionAbstract|\ReflectionProperty|\ReflectionClass|\ReflectionParameter */
   protected $reflector;
+  /** @var string */
   protected $name;
 
   public function __construct(\Reflector $reflector)
