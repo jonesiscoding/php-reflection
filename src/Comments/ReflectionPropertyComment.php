@@ -23,6 +23,17 @@ class ReflectionPropertyComment extends ReflectionComment
     parent::__construct($ReflectionProperty);
   }
 
+  /**
+   * @return \ReflectionClass
+   */
+  public function getDeclaringClass(): \ReflectionClass
+  {
+    return $this->reflector->getDeclaringClass();
+  }
+
+  /**
+   * @return ReflectionVar
+   */
   public function getType(): ReflectionVar
   {
     return $this->getVar()->type;
