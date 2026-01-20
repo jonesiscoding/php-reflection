@@ -8,6 +8,8 @@ use DevCoding\Reflection\Vars\ReflectionVar;
 /**
  * Reflection-style object representing the DocComment of a ReflectionProperty
  *
+ * @property \ReflectionProperty $reflector
+ *
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
