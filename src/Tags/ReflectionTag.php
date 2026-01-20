@@ -3,7 +3,6 @@
 namespace DevCoding\Reflection\Tags;
 
 use DevCoding\Reflection\Bags\TagBag;
-use DevCoding\Reflection\Helper\StringEndsWithTrait;
 use DevCoding\Reflection\Vars\RelflectionUnionVar;
 use DevCoding\Reflection\Vars\ReflectionNamedVar;
 use DevCoding\Reflection\Vars\ReflectionPrototypeVar;
@@ -25,8 +24,6 @@ use DevCoding\Reflection\Vars\ReflectionVar;
  */
 class ReflectionTag extends \ArrayIterator
 {
-  use StringEndsWithTrait;
-
   const STANDARD     = "#@(?<tag>var|param|property)\s+(?<type>[^\s]+)(?:\s+(?<name>\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*))?(?:\s+(?<description>.+))?#";
   const METHOD       = '#@(?<tag>method)\s+(?:(?<static>static)\s+)?(?:(?<type>\S+)\s+)?(?<name>\w+)\((?<params>[^\)]+)?\)(?:\s+(?<description>.*))?#';
   const METHOD_PARAM = '#^(?:(?<type>[^$]+)\s+)?\$(?<name>\w+)(?:\s*=\s*(?<default>"[^"]+"|\[[^\]]+\]|[^,]+))?$#';

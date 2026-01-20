@@ -3,7 +3,6 @@
 namespace DevCoding\Reflection\Bags;
 
 use DevCoding\Reflection\Doctrine;
-use DevCoding\Reflection\Helper\ArrayFirstTrait;
 use DevCoding\Reflection\ReflectionAnnotation;
 use Psr\Container\ContainerInterface;
 
@@ -15,8 +14,6 @@ use Psr\Container\ContainerInterface;
  */
 class AnnotationBag implements ContainerInterface
 {
-  use ArrayFirstTrait;
-
   /** @var ReflectionAnnotation[] */
   protected $annotations;
 
@@ -91,7 +88,7 @@ class AnnotationBag implements ContainerInterface
     {
       if ($this->has($column))
       {
-        return $this->array_first($this->get($column))->getAnnotation();
+        return array_first($this->get($column))->getAnnotation();
       }
     }
 

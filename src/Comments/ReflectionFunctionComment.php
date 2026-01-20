@@ -4,7 +4,6 @@ namespace DevCoding\Reflection\Comments;
 
 use DevCoding\Reflection\Bags\TagBag;
 use DevCoding\Reflection\Exceptions\TagNotFoundException;
-use DevCoding\Reflection\Helper\StringStartsWithTrait;
 use DevCoding\Reflection\Tags\ReflectionParamTag;
 use DevCoding\Reflection\Tags\ReflectionTag;
 use DevCoding\Reflection\Tags\TagGroup;
@@ -19,8 +18,6 @@ use DevCoding\Reflection\Vars\ReflectionVar;
  */
 class ReflectionFunctionComment extends ReflectionComment
 {
-  use StringStartsWithTrait;
-
   /**
    * @param \ReflectionFunctionAbstract $function
    */
@@ -110,7 +107,7 @@ class ReflectionFunctionComment extends ReflectionComment
       return $count > 0;
     }
 
-    if ($this->str_starts_with($exception, '\\'))
+    if (str_starts_with($exception, '\\'))
     {
       $exception = substr($exception, 1);
     }

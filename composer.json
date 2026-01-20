@@ -11,11 +11,10 @@
     ],
     "autoload": {
         "psr-4": {
-            "DevCoding\\Reflection\\": "src",
+            "DevCoding\\Reflection\\": "src/",
             "DevCoding\\Reflection\\Bags\\": "src/Bags",
             "DevCoding\\Reflection\\Comments\\": "src/Comments",
             "DevCoding\\Reflection\\Exception\\": "src/Exceptions",
-            "DevCoding\\Reflection\\Helper\\": "src/Helper",
             "DevCoding\\Reflection\\Tags\\": "src/Tags",
             "DevCoding\\Reflection\\Vars\\": "src/Vars"
         }
@@ -28,7 +27,8 @@
     },
     "require": {
         "php": ">=7.0",
-        "psr/container": "^1.0 || ^2.0"
+        "psr/container": "^1.0 || ^2.0",
+        "deviscoding/php-polyfill": "^1.85"
     },
     "require-dev": {
         "doctrine/annotations": "^1.0 || ^2.0",

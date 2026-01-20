@@ -2,8 +2,6 @@
 
 namespace DevCoding\Reflection;
 
-use DevCoding\Reflection\Helper\StringEndsWithTrait;
-
 /**
  * Reflection-style class which reads the imports from the given ReflectionClass to allow for type resolution from
  * short class names, as used in most PHPdocs.
@@ -13,8 +11,6 @@ use DevCoding\Reflection\Helper\StringEndsWithTrait;
  */
 class ReflectionClassImports
 {
-  use StringEndsWithTrait;
-
   public static $parsed = [];
 
   /** @var \ReflectionClass */
@@ -179,7 +175,7 @@ class ReflectionClassImports
         }
 
         $statement = implode('', $useStatement);
-        if (!$this->str_ends_with($statement, ';'))
+        if (!str_ends_with($statement, ';'))
         {
           $statement .= ';';
         }
