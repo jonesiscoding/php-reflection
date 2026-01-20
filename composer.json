@@ -11,12 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "DevCoding\\Reflection\\": "src/",
-            "DevCoding\\Reflection\\Bags\\": "src/Bags",
-            "DevCoding\\Reflection\\Comments\\": "src/Comments",
-            "DevCoding\\Reflection\\Exception\\": "src/Exceptions",
-            "DevCoding\\Reflection\\Tags\\": "src/Tags",
-            "DevCoding\\Reflection\\Vars\\": "src/Vars"
+            "DevCoding\\Reflection\\": "src/"
         }
     },
     "version": "1.70",
