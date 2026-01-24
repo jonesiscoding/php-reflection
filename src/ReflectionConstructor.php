@@ -84,7 +84,7 @@ class ReflectionConstructor extends ReflectionTag
    */
   public function getMatch(\ReflectionParameter $parameter, array $array)
   {
-    $name  = new ReflectionName($parameter);
+    $name  = new ReflectionConstruct($parameter);
     $type  = $this->getParameterType($parameter->getName());
     $tries = [$name, $name->snake(), $name->pascal()];
 

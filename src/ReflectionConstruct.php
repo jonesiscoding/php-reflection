@@ -6,12 +6,12 @@ use DevCoding\Reflection\Vars\ReflectionNamedVar;
 use DevCoding\Reflection\Vars\ReflectionVar;
 
 /**
- * Reflection-style class for manipulation of a name from a class, property, parameter, or function.
+ * Reflection-style class for manipulation of a construct representing class, property, parameter, or function name.
  *
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
-class ReflectionName
+class ReflectionConstruct
 {
   const GET = 'get';
   const SET = 'set';
@@ -21,7 +21,7 @@ class ReflectionName
   const PATTERN_PASCAL = ' _-';
   const PATTERN_SNAKE  = '~(?<=\\w)([A-Z])~';
 
-  /** @var \ReflectionFunctionAbstract|\ReflectionProperty|\ReflectionClass|\ReflectionParameter */
+  /** @var \ReflectionFunctionAbstract|\ReflectionProperty|\ReflectionClass|\ReflectionParameter|ReflectionString */
   protected $reflector;
   /** @var string */
   protected $name;
@@ -29,7 +29,7 @@ class ReflectionName
   public function __construct(\Reflector $reflector)
   {
     $this->reflector = $reflector;
-    $this->name      = $reflector->getName();
+    $this->name      = method_exists($reflector, 'getName') ? $reflector->getName() : (string) $reflector;
   }
 
   /**
