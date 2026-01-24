@@ -4,6 +4,7 @@ namespace DevCoding\Reflection\Bags;
 
 use DevCoding\Reflection\Exceptions\TagNotFoundException;
 use DevCoding\Reflection\Tags\ReflectionTag;
+use DevCoding\Reflection\Tags\TagGroup;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -12,17 +13,14 @@ use Psr\Container\ContainerInterface;
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
-class TagBag implements ContainerInterface
+class TagBag extends TagGroup implements ContainerInterface
 {
-  /** @var ReflectionTag */
-  protected $tags;
-
   /**
-   * @param ReflectionTag[] $tags
+   * @return ReflectionTag[]
    */
-  public function __construct(array $tags)
+  public function all()
   {
-    $this->tags = $tags;
+    return $this->getArrayCopy();
   }
 
   /**
@@ -37,7 +35,7 @@ class TagBag implements ContainerInterface
       throw new TagNotFoundException($id);
     }
 
-    return $this->tags[$id];
+    return parent::offsetGet($id);
   }
 
   /**
@@ -47,7 +45,7 @@ class TagBag implements ContainerInterface
    */
   public function has($id)
   {
-    return isset($this->tags[$id]);
+    return parent::offsetExists($id);
   }
 
   /**
@@ -57,7 +55,7 @@ class TagBag implements ContainerInterface
    */
   public function add(ReflectionTag $tag)
   {
-    $this->tags[$tag->name] = $tag;
+    $this->append($tag);
 
     return $this;
   }
