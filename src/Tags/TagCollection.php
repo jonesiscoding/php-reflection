@@ -3,6 +3,8 @@
 namespace DevCoding\Reflection\Tags;
 
 use DevCoding\Reflection\Bags\TagBag;
+use DevCoding\Reflection\ReflectionConstruct;
+use DevCoding\Reflection\ReflectionString;
 
 /**
  * Collection of ReflectionTag objects, grouped by TagGroup or TagBag.
@@ -78,7 +80,7 @@ class TagCollection extends \ArrayIterator
    */
   public function offsetNormalize($key): string
   {
-    return (new ConstructString($key))->camelize();
+    return (new ReflectionConstruct(new ReflectionString($key)))->camel();
   }
 
   /**
