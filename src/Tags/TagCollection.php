@@ -30,6 +30,8 @@ use DevCoding\Reflection\ReflectionString;
  */
 class TagCollection extends \ArrayIterator
 {
+  const SINGLE = ['api','default','description','ignore','internal','required','return','summary','var'];
+
   /**
    * @param ReflectionTag[] $tags
    */
@@ -65,10 +67,11 @@ class TagCollection extends \ArrayIterator
    */
   public function offsetGet($key)
   {
-    $collection = parent::offsetGet($this->offsetNormalize($key));
-    $first      = $collection->first();
+    /** @var TagGroup $group */
+    $group = parent::offsetGet($this->offsetNormalize($key));
+    $first = 1 === count($group) ? $group->first() : null;
 
-    return $first instanceof NamedTagInterface ? $collection : $first;
+    return $first && in_array($first->tag, self::SINGLE) ? $first : $group;
   }
 
   /**
@@ -132,11 +135,18 @@ class TagCollection extends \ArrayIterator
 
       if (!$this->offsetExists($tag))
       {
-        parent::offsetSet($tag, new TagGroup([$value]));
+        if ($value instanceof NamedTagInterface)
+        {
+          parent::offsetSet($tag, new TagBag([$value]));
+        }
+        else
+        {
+          parent::offsetSet($tag, new TagGroup([$value]));
+        }
       }
       else
       {
-        $this->offsetGet($tag)->append($value);
+        parent::offsetGet($tag)->append($value);
       }
     }
   }
