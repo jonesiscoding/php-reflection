@@ -2,7 +2,7 @@
 
 namespace DevCoding\Reflection\Vars;
 
-use DevCoding\Reflection\ReflectionClassImports;
+use DevCoding\Reflection\Types\Type;
 
 /**
  * Reflection-style class similar to ReflectionNamedType, but primarily using information from PHPdoc tags to allow for
@@ -67,21 +67,9 @@ class ReflectionNamedVar extends ReflectionVar
     if (!$this->resolved)
     {
       $this->resolved = true;
-      if (!$this->isBuiltin() && !class_exists($this->type))
+      if ($type = Type::tryFrom($this->type))
       {
-        $class = $this->getDeclaringClass();
-        if (class_exists($class->getNamespaceName() . '\\' . $this->type))
-        {
-          $this->type = $class->getNamespaceName() . '\\' . $this->type;
-        }
-        else
-        {
-          $imports = new ReflectionClassImports($class);
-          if ($imports->offsetExists($this->type))
-          {
-            $this->type = $imports->offsetGet($this->type);
-          }
-        }
+        $this->type = (string) $type->normalized();
       }
     }
 
