@@ -8,6 +8,7 @@ use DevCoding\Reflection\Tags\ReflectionParamTag;
 use DevCoding\Reflection\Tags\ReflectionTag;
 use DevCoding\Reflection\Tags\TagGroup;
 use DevCoding\Reflection\Vars\ReflectionNamedVar;
+use DevCoding\Reflection\Vars\ReflectionUnionVar;
 use DevCoding\Reflection\Vars\ReflectionVar;
 
 /**
@@ -37,7 +38,7 @@ class ReflectionFunctionComment extends ReflectionComment
   }
 
   /**
-   * @return ReflectionVar
+   * @return ReflectionUnionVar|ReflectionNamedVar
    */
   public function getReturnType(): ReflectionVar
   {
