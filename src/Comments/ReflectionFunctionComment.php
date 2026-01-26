@@ -30,6 +30,27 @@ class ReflectionFunctionComment extends ReflectionComment
   }
 
   /**
+   * Returns an array of imports required by the parameters and return type of this ReflectionFunctionComment
+   *
+   * @return string[]
+   */
+  public function getImports(): array
+  {
+    $imports = [];
+
+    $this->addImports($this->getReturnType(), $imports);
+    foreach($this->getParams() as $param)
+    {
+      if (isset($param->type))
+      {
+        $this->addImports($param->type, $imports);
+      }
+    }
+
+    return array_keys($imports);
+  }
+
+  /**
    * @return ReflectionTag|null
    */
   public function getReturn()
@@ -124,5 +145,26 @@ class ReflectionFunctionComment extends ReflectionComment
     }
 
     return false;
+  }
+
+  /**
+   * @param ReflectionNamedVar|ReflectionUnionVar $type
+   * @param array $imports
+   *
+   * @return $this
+   */
+  protected function addImports($type, &$imports)
+  {
+    if (isset($type))
+    {
+      $types = $type instanceof ReflectionUnionVar ? $type->getTypes() : [$type];
+      foreach($types as $type)
+      {
+        /** @var ReflectionNamedVar $type */
+        $imports[$type->getName()] = true;
+      }
+    }
+
+    return $this;
   }
 }
