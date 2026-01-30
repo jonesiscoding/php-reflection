@@ -83,7 +83,7 @@ class TagCollection extends \ArrayIterator
    */
   public function offsetNormalize($key): string
   {
-    return (new ReflectionConstruct(new ReflectionString($key)))->camel();
+    return (new ReflectionConstruct($key))->camel();
   }
 
   /**

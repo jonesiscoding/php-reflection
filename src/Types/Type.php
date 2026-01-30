@@ -180,7 +180,7 @@ class Type implements Builtins, Aliases, Shapes, Reference
       }
       else
       {
-        $this->short = (new ReflectionClassName(new ReflectionString($this->normalized)))->getShortName();
+        $this->short = (new ReflectionClassName($this->normalized))->getShortName();
       }
     }
 
@@ -203,7 +203,7 @@ class Type implements Builtins, Aliases, Shapes, Reference
       }
       else
       {
-        $this->namespace = (new ReflectionClassName(new ReflectionString($this->normalized)))->getNamespace();
+        $this->namespace = (new ReflectionClassName($this->normalized))->getNamespace();
       }
     }
 

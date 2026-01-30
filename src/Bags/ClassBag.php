@@ -115,7 +115,7 @@ class ClassBag extends ConstructBag
   {
     if (!isset($this->names[$id]))
     {
-      $this->names[$id] = new ReflectionClassName($this->reflection($id));
+      $this->names[$id] = new ReflectionClassName($id);
     }
 
     return $this->names[$id];

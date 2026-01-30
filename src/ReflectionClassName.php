@@ -20,7 +20,7 @@ class ReflectionClassName extends ReflectionConstruct
    */
   public function exists()
   {
-    return class_exists($this->name);
+    return class_exists($this->string);
   }
 
   /**
@@ -30,7 +30,7 @@ class ReflectionClassName extends ReflectionConstruct
    */
   public function getName()
   {
-    return $this->name;
+    return $this->string;
   }
 
   /**
@@ -55,7 +55,7 @@ class ReflectionClassName extends ReflectionConstruct
       }
       catch (\Exception $e)
       {
-        $this->short = substr(strrchr($this->name, '\\'), 1);
+        $this->short = substr(strrchr($this->string, '\\'), 1);
       }
     }
 
@@ -84,7 +84,7 @@ class ReflectionClassName extends ReflectionConstruct
       }
       catch (\Exception $e)
       {
-        $this->namespace = str_replace($this->getName().'\\', '', $this->name);
+        $this->namespace = str_replace($this->getName().'\\', '', $this->string);
       }
     }
 
