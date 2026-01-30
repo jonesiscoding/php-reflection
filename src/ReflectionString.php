@@ -20,4 +20,17 @@ class ReflectionString implements \Reflector
   {
     return $this->string;
   }
+
+  /**
+   * @param $string
+   *
+   * @return string[]
+   */
+  public static function explodeClass($string): array
+  {
+    $short = substr(strrchr($string, '\\'), 1);
+
+    return [substr($string, 0, -(strlen($short) + 1)), $short];
+  }
+
 }
