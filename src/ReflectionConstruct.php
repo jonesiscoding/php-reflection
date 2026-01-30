@@ -11,7 +11,7 @@ use DevCoding\Reflection\Vars\ReflectionVar;
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
-class ReflectionConstruct
+class ReflectionConstruct implements \Reflector
 {
   const GET = 'get';
   const SET = 'set';
@@ -30,6 +30,16 @@ class ReflectionConstruct
   {
     $this->reflector = $reflector;
     $this->name      = method_exists($reflector, 'getName') ? $reflector->getName() : (string) $reflector;
+  }
+
+  public static function export()
+  {
+    throw new \ReflectionException(\Reflector::class . '::export is deprecated and was not implemented in '.__CLASS__);
+  }
+
+  public function __toString()
+  {
+    return $this->name;
   }
 
   /**
