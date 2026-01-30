@@ -29,7 +29,7 @@ class ReflectionConstruct implements \Reflector
   public function __construct(\Reflector $reflector)
   {
     $this->reflector = $reflector;
-    $this->name      = method_exists($reflector, 'getName') ? $reflector->getName() : (string) $reflector;
+    $this->name      = method_exists($reflector, 'getName') ? $reflector->getString() : (string) $reflector;
   }
 
   public static function export()
