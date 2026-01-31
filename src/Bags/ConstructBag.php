@@ -55,7 +55,7 @@ abstract class ConstructBag extends \ArrayIterator
   /**
    * Merges the given array of construct names into this container.
    *
-   * @param string[] $array
+   * @param array $array
    *
    * @return $this
    */

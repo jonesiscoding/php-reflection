@@ -7,6 +7,9 @@ use DevCoding\Reflection\ReflectionString;
 
 class NamespaceBag extends ConstructBag
 {
+  /** @var string[] */
+  protected $directories;
+
   /**
    * Returns an array of directories that contain files for the given namespace name.
    *
@@ -16,7 +19,16 @@ class NamespaceBag extends ConstructBag
    */
   public function directories(string $id): array
   {
-    return $this->get($id);
+    if (!isset($this->directories[$id]))
+    {
+      $classes = $this->get($id);
+      foreach($classes as $file)
+      {
+        $this->directories[$id] = $file ? dirname($file) : false;
+      }
+    }
+
+    return $this->directories[$id];
   }
 
   /**
@@ -47,7 +59,7 @@ class NamespaceBag extends ConstructBag
    *
    * @param string $id
    *
-   * @return array
+   * @return ClassBag
    * @throws NotFoundException
    */
   public function get(string $id)

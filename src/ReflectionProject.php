@@ -184,12 +184,20 @@ class ReflectionProject
             }
           }
 
+          $namespaces = [];
           foreach($this->classes as $class => $file)
           {
             $ns = array_first(ReflectionString::explodeClass($class));
 
-            $this->namespaces[$ns][] = dirname($file);
+            if (!isset($namespaces[$ns]))
+            {
+              $namespaces[$ns] = new ClassBag();
+            }
+
+            $namespaces[$ns]->offsetSet($class, $file);
           }
+
+          $this->namespaces->merge($namespaces);
         }
         catch(\Throwable $t)
         {
