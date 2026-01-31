@@ -4,7 +4,6 @@ namespace DevCoding\Reflection\Types;
 
 use DevCoding\Reflection\ReflectionClassName;
 use DevCoding\Reflection\ReflectionContext;
-use DevCoding\Reflection\ReflectionString;
 use DevCoding\Reflection\Types\Base\Aliases;
 use DevCoding\Reflection\Types\Base\Builtins;
 use DevCoding\Reflection\Types\Base\Iterables;

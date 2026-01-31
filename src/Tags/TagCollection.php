@@ -4,7 +4,6 @@ namespace DevCoding\Reflection\Tags;
 
 use DevCoding\Reflection\Bags\TagBag;
 use DevCoding\Reflection\ReflectionConstruct;
-use DevCoding\Reflection\ReflectionString;
 
 /**
  * Collection of ReflectionTag objects, grouped by TagGroup or TagBag.

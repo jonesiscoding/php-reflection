@@ -23,7 +23,7 @@ class ReflectionConstruct implements \Reflector
   const PATTERN_PASCAL = ' _-';
   const PATTERN_SNAKE  = '~(?<=\\w)([A-Z])~';
 
-  /** @var \ReflectionFunctionAbstract|\ReflectionProperty|\ReflectionClass|\ReflectionParameter|ReflectionString */
+  /** @var \ReflectionFunctionAbstract|\ReflectionProperty|\ReflectionClass|\ReflectionParameter|ReflectionConstruct */
   protected $reflector;
   /** @var string Original raw string */
   protected $string;
@@ -66,6 +66,18 @@ class ReflectionConstruct implements \Reflector
         $this->member = substr($this->member, 1);
       }
     }
+  }
+
+  /**
+   * @param $string
+   *
+   * @return string[]
+   */
+  public static function explodeClass($string): array
+  {
+    $short = substr(strrchr($string, '\\'), 1);
+
+    return [substr($string, 0, -(strlen($short) + 1)), $short];
   }
 
   /**
@@ -453,18 +465,6 @@ class ReflectionConstruct implements \Reflector
   // endregion ///////////////////////////////////////////// End Like Matches
 
   // region //////////////////////////////////////////////// Helpers
-
-  /**
-   * @param $string
-   *
-   * @return string[]
-   */
-  protected function explodeClass($string): array
-  {
-    $short = substr(strrchr($string, '\\'), 1);
-
-    return [substr($string, 0, -(strlen($short) + 1)), $short];
-  }
 
   /**
    * @param string $file

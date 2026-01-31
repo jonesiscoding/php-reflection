@@ -3,7 +3,7 @@
 namespace DevCoding\Reflection\Bags;
 
 use DevCoding\Reflection\Exceptions\ReflectorNotFoundException;
-use DevCoding\Reflection\ReflectionString;
+use DevCoding\Reflection\ReflectionConstruct;
 
 class NamespaceBag extends ConstructBag
 {
@@ -36,7 +36,7 @@ class NamespaceBag extends ConstructBag
 
     if (!isset($this->reflection[$id]))
     {
-      $this->reflection[$id] = new ReflectionString($id);
+      $this->reflection[$id] = new ReflectionConstruct($id);
     }
 
     return $this->reflection[$id];
