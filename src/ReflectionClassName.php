@@ -8,7 +8,7 @@ namespace DevCoding\Reflection;
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
-class ReflectionClassName extends ReflectionConstruct
+class ReflectionClassName extends ReflectionString
 {
   /** @var string */
   protected $namespace;
@@ -28,7 +28,7 @@ class ReflectionClassName extends ReflectionConstruct
    *
    * @return string
    */
-  public function getName()
+  public function getName(): string
   {
     return $this->string;
   }

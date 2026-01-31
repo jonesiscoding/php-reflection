@@ -14,7 +14,7 @@ class ReflectionAccess
 {
   /** @var \ReflectionClass */
   protected $class;
-  /** @var ReflectionConstruct */
+  /** @var ReflectionString */
   protected $name;
   /** @var \ReflectionProperty */
   protected $property;
@@ -41,7 +41,7 @@ class ReflectionAccess
   {
     $this->property = $property;
     $this->class    = $class ?? $this->property->getDeclaringClass();
-    $this->name     = new ReflectionConstruct($property);
+    $this->name     = new ReflectionString($property);
   }
 
   /**
@@ -116,7 +116,7 @@ class ReflectionAccess
     throw new \ReflectionException(sprintf(
         '%s::%s() has not been implemented.',
         $this->class->getName(),
-        $this->name->method(ReflectionConstruct::SET)
+        $this->name->method(ReflectionString::SET)
     ));
   }
 
@@ -229,7 +229,7 @@ class ReflectionAccess
 
       try
       {
-        $name = $this->name->method(ReflectionConstruct::SET);
+        $name = $this->name->method(ReflectionString::SET);
         if ($this->class->hasMethod($name))
         {
           $method = $this->class->getMethod($name);

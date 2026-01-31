@@ -11,7 +11,7 @@ use DevCoding\Reflection\Vars\ReflectionVar;
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
-class ReflectionConstruct implements \Reflector
+class ReflectionString implements \Reflector
 {
   const GET            = 'get';
   const SET            = 'set';
@@ -23,7 +23,7 @@ class ReflectionConstruct implements \Reflector
   const PATTERN_PASCAL = ' _-';
   const PATTERN_SNAKE  = '~(?<=\\w)([A-Z])~';
 
-  /** @var \ReflectionFunctionAbstract|\ReflectionProperty|\ReflectionClass|\ReflectionParameter|ReflectionConstruct */
+  /** @var \ReflectionFunctionAbstract|\ReflectionProperty|\ReflectionClass|\ReflectionParameter|ReflectionString */
   protected $reflector;
   /** @var string Original raw string */
   protected $string;

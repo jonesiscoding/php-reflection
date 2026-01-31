@@ -85,7 +85,7 @@ class ReflectionContext
     {
       $this->context = $context->getClosureScopeClass();
     }
-    elseif($context instanceof ReflectionConstruct)
+    elseif($context instanceof ReflectionString)
     {
       $this->context = new \ReflectionClass($context);
     }

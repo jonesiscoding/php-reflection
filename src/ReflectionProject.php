@@ -186,7 +186,7 @@ class ReflectionProject
 
           foreach($this->classes as $class => $file)
           {
-            $ns = array_first(ReflectionConstruct::explodeClass($class));
+            $ns = array_first(ReflectionString::explodeClass($class));
 
             $this->namespaces[$ns][] = dirname($file);
           }
