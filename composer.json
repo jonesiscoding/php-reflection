@@ -23,7 +23,7 @@
     "require": {
         "php": ">=7.0",
         "psr/container": "^1.0 || ^2.0",
-        "deviscoding/php-polyfill": "^1.85"
+        "deviscoding/php-polyfill": "dev-main"
     },
     "require-dev": {
         "doctrine/annotations": "^1.0 || ^2.0",

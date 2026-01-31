@@ -1,4 +1,5 @@
 <?php
+/** @noinspection PhpMultipleClassDeclarationsInspection */
 
 namespace DevCoding\Reflection\Comments;
 
@@ -14,7 +15,7 @@ use DevCoding\Reflection\Tags\TagCollection;
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
-class ReflectionComment
+class ReflectionComment implements \Stringable
 {
   const NAMED = ['method','param','property','property-write','property-read'];
 
@@ -42,6 +43,21 @@ class ReflectionComment
     if (!empty($summary = $this->extractSummary($comment)))
     {
       $this->tags['summary'] = new ReflectionTag($this->reflector, $summary);
+    }
+  }
+
+  /**
+   * @return string
+   */
+  public function __toString()
+  {
+    try
+    {
+      return $this->reflector->getDocComment();
+    }
+    catch(\ReflectionException $e)
+    {
+      return '';
     }
   }
 
