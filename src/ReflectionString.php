@@ -77,7 +77,7 @@ class ReflectionString implements \Reflector
   {
     $short = substr(strrchr($string, '\\'), 1);
 
-    return [substr($string, 0, -(strlen($short) + 1)), $short];
+    return !empty($short) ? [trim(substr($string, 0, -strlen($short)), '\\'), $short] : ['', $string];
   }
 
   /**
@@ -89,7 +89,7 @@ class ReflectionString implements \Reflector
   }
 
   /**
-   * @return \ReflectionMethod|\ReflectionClass|\ReflectionProperty|ReflectionNamespace|\Reflector
+   * @return \DevCoding\Reflection\ReflectionMethod|\ReflectionClass|\ReflectionProperty|ReflectionNamespace|\Reflector
    * @throws \ReflectionException
    */
   public function getReflector(): \Reflector
@@ -102,7 +102,7 @@ class ReflectionString implements \Reflector
       }
       elseif ($this->isMethod() || $this->isMethodLike())
       {
-        return new \ReflectionMethod($this->class, $this->member);
+        return new \DevCoding\Reflection\ReflectionMethod($this->class, $this->member);
       }
       elseif ($this->isProperty() || $this->isPropertyLike())
       {
