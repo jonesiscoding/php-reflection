@@ -2,7 +2,7 @@
 
 namespace DevCoding\Reflection\Types\Base;
 
-class Iterables
+interface Iterables
 {
   const ARRAY       = 'array';
   const TRAVERSABLE = \Traversable::class;
