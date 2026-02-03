@@ -4,7 +4,7 @@ namespace DevCoding\Reflection;
 
 use DevCoding\Reflection\Exceptions\MissingParameterException;
 use DevCoding\Reflection\Tags\ReflectionTag;
-use DevCoding\Reflection\Vars\ReflectionVar;
+use DevCoding\Reflection\Types\Type;
 
 /**
  * Reflection-style class representing a class constructor, for use in the autowiring of class objects.
@@ -165,7 +165,7 @@ class ReflectionConstructor extends ReflectionTag
   /**
    * @param string $name
    *
-   * @return ReflectionVar|null
+   * @return Type|null
    */
   public function getParameterType(string $name)
   {

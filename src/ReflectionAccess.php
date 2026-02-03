@@ -2,7 +2,7 @@
 
 namespace DevCoding\Reflection;
 
-use DevCoding\Reflection\Vars\ReflectionVar;
+use DevCoding\Reflection\Types\Type;
 
 /**
  * Reflection style class providing accessibility to a RefelctionProperty through a getter, setter, or directly.
@@ -300,7 +300,7 @@ class ReflectionAccess
   {
     if (!isset($this->nullable))
     {
-      $this->nullable = ReflectionVar::fromReflectionProperty($this->property)->allowsNull();
+      $this->nullable = Type::tryFromReflector($this->property)->allowsNull();
     }
 
     return $this->nullable;
@@ -325,7 +325,7 @@ class ReflectionAccess
         $this->writable = $this->property->isPublic() || $this->hasSet();
       }
 
-      $var = ReflectionVar::fromReflectionProperty($this->property);
+      $var = Type::tryFromReflector($this->property);
       if ($var->allowsNull())
       {
         $this->nullable = true;

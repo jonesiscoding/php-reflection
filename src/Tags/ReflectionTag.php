@@ -3,17 +3,13 @@
 namespace DevCoding\Reflection\Tags;
 
 use DevCoding\Reflection\Bags\TagBag;
-use DevCoding\Reflection\Vars\RelflectionUnionVar;
-use DevCoding\Reflection\Vars\ReflectionNamedVar;
-use DevCoding\Reflection\Vars\ReflectionPrototypeVar;
-use DevCoding\Reflection\Vars\ReflectionUnionVar;
-use DevCoding\Reflection\Vars\ReflectionVar;
+use DevCoding\Reflection\Types\Type;
 
 /**
  * Reflection style object containing data from a parsed PHPdoc tag.
  *
  * @property string|null        $tag          Name of the tag
- * @property ReflectionVar|null $type         Type of property or parameter, return type of method
+ * @property Type|null          $type         Type of property or parameter, return type of method
  * @property TagBag|null        $params       Array of parameters from a method
  *
  * @property string|null        $description  Freeform description text
@@ -36,19 +32,7 @@ class ReflectionTag extends \ArrayIterator
   {
     if ($t = $tag['type'] ?? null)
     {
-      $d = $tag['description'] ?? null;
-      if (ReflectionUnionVar::handles($t))
-      {
-        $tag['type'] = new ReflectionUnionVar($reflector, $t, $d);
-      }
-      elseif (ReflectionPrototypeVar::handles($t))
-      {
-        $tag['type'] = new ReflectionPrototypeVar($reflector, $t, $d);
-      }
-      else
-      {
-        $tag['type'] = new ReflectionNamedVar($reflector, $t, $d);
-      }
+      $tag['type'] = Type::tryFrom($t);
     }
 
     if ($params = $tag['params'] ?? null)

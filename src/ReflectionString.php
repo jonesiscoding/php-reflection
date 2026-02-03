@@ -2,8 +2,8 @@
 
 namespace DevCoding\Reflection;
 
-use DevCoding\Reflection\Vars\ReflectionNamedVar;
-use DevCoding\Reflection\Vars\ReflectionVar;
+use DevCoding\Reflection\Types\Base\Scalar;
+use DevCoding\Reflection\Types\Type;
 
 /**
  * Reflection-style class for manipulation of a construct string representing class, property, parameter, or function.
@@ -89,7 +89,7 @@ class ReflectionString implements \Reflector
   }
 
   /**
-   * @return \DevCoding\Reflection\ReflectionMethod|\ReflectionClass|\ReflectionProperty|ReflectionNamespace|\Reflector
+   * @return \ReflectionMethod|\ReflectionClass|\ReflectionProperty|ReflectionNamespace|\Reflector
    * @throws \ReflectionException
    */
   public function getReflector(): \Reflector
@@ -102,7 +102,7 @@ class ReflectionString implements \Reflector
       }
       elseif ($this->isMethod() || $this->isMethodLike())
       {
-        return new \DevCoding\Reflection\ReflectionMethod($this->class, $this->member);
+        return new \ReflectionMethod($this->class, $this->member);
       }
       elseif ($this->isProperty() || $this->isPropertyLike())
       {
@@ -162,8 +162,8 @@ class ReflectionString implements \Reflector
     {
       if (self::GET === $prefix && $normalize)
       {
-        $var = ReflectionVar::fromReflectionProperty($this->reflector);
-        if ($var instanceof ReflectionNamedVar && $var->isBool())
+        $var = Type::tryFromReflector($this->reflector);
+        if ($var instanceof Type && Scalar::BOOL === (string) $var)
         {
           $prefix = self::IS;
         }

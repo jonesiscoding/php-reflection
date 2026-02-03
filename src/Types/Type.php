@@ -3,15 +3,19 @@
 namespace DevCoding\Reflection\Types;
 
 use DevCoding\Reflection\ReflectionClassName;
-use DevCoding\Reflection\ReflectionContext;
 use DevCoding\Reflection\Types\Base\Aliases;
 use DevCoding\Reflection\Types\Base\Builtins;
+use DevCoding\Reflection\Types\Base\CompoundInterface;
 use DevCoding\Reflection\Types\Base\Iterables;
 use DevCoding\Reflection\Types\Base\Psuedo;
 use DevCoding\Reflection\Types\Base\Reference;
 use DevCoding\Reflection\Types\Base\Scalar;
-use DevCoding\Reflection\Types\Base\Shapes;
+use DevCoding\Reflection\Types\Base\ShapeInterface;
 use DevCoding\Reflection\Types\Base\Singleton;
+use DevCoding\Reflection\Types\Base\TypeInterface;
+use DevCoding\Reflection\Types\Base\VariableInterface;
+use DevCoding\Reflection\Types\Factory\Factory;
+use DevCoding\Reflection\Types\Shape\ShapeDefinition;
 
 /**
  * Object class representing a PHP type
@@ -19,15 +23,17 @@ use DevCoding\Reflection\Types\Base\Singleton;
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
-class Type implements Builtins, Aliases, Shapes, Reference
+abstract class Type implements Builtins, Aliases, Reference, TypeInterface
 {
-  /** @var string[][]  */
-  protected static $types = [];
+  /** @var Factory */
+  protected static $factory;
+  /** @var array */
+  private static $types;
   /** @var string */
   protected $normalized;
   /** @var string */
   protected $raw;
-  /** @var Shape|null */
+  /** @var ShapeDefinition|null */
   protected $shape;
   /** @var string */
   protected $short;
@@ -38,25 +44,11 @@ class Type implements Builtins, Aliases, Shapes, Reference
    * Sets and normalizes the type. If the type is not a builtin or a fully qualified class/interface, and a context is
    * given, will attempt to resolve the type into a fully qualified class/interface.
    *
-   * @param string          $raw
-   * @param \Reflector|null $context
-   * @throws \ReflectionException
+   * @param string $raw
    */
-  protected function __construct(string $raw, \Reflector $context = null)
+  protected function __construct(string $raw)
   {
     $this->raw = $raw;
-
-    $this->doNormalize($context);
-    if ($this->hasNamespace() || !$this->isBuiltin())
-    {
-      if (!$this->isClass() && !$this->isInterface())
-      {
-        if ($context = ReflectionContext::from($context))
-        {
-          $this->normalized = $context->resolve($this->normalized);
-        }
-      }
-    }
   }
 
   /**
@@ -65,13 +57,41 @@ class Type implements Builtins, Aliases, Shapes, Reference
    *
    * @param string     $string    Type
    * @param \Reflector $context   Reflector to use when resolving class names to fully qualified class names
+   * @param array{ shape: ShapeDefinition, type: string, inner: string } $matches;
    *
    * @return self
    * @throws \ReflectionException
    */
-  public static function from(string $string, \Reflector $context = null)
+  public static function from(string $string, \Reflector $context = null, &$matches = [])
   {
-    return new self($string, $context);
+    $matches = [];
+    $factory = static::$factory = static::$factory ?? new Factory();
+    $class   = $factory->match($string, $context, $matches);
+    $type    = $matches['type'] ?? $string;
+    $object  = new $class($type, $context);
+
+    if ($object instanceof VariableInterface && isset($matches['type']))
+    {
+      $object->setType($matches['type']);
+    }
+    elseif ($object instanceof CompoundInterface)
+    {
+      $factory->inner($object, $matches, $context);
+    }
+
+    if ($object instanceof ShapeInterface)
+    {
+      $factory->shape($object, $matches, $context);
+    }
+
+    return $object;
+  }
+
+  public static function fromReflector(\Reflector $reflector)
+  {
+    $factory = static::$factory = static::$factory ?? new Factory();
+
+    return static::from($factory->extract($reflector), $reflector);
   }
 
   /**
@@ -85,6 +105,18 @@ class Type implements Builtins, Aliases, Shapes, Reference
     try
     {
       return self::from($string, $context);
+    }
+    catch(\Throwable $t)
+    {
+      return null;
+    }
+  }
+
+  public static function tryFromReflector(\Reflector $reflector)
+  {
+    try
+    {
+      return self::fromReflector($reflector);
     }
     catch(\Throwable $t)
     {
@@ -160,7 +192,12 @@ class Type implements Builtins, Aliases, Shapes, Reference
    */
   public function __toString()
   {
-    return $this->raw;
+    return $this->normalized ?? $this->raw;
+  }
+
+  public function allowsNull(): bool
+  {
+    return false;
   }
 
   /**
@@ -304,10 +341,10 @@ class Type implements Builtins, Aliases, Shapes, Reference
    *
    * @return Type
    */
-  public function normalized()
+  public function raw()
   {
     $obj      = clone $this;
-    $obj->raw = $obj->normalized;
+    $obj->normalized = null;
 
     return $obj;
   }
@@ -317,68 +354,11 @@ class Type implements Builtins, Aliases, Shapes, Reference
   // region //////////////////////////////////////////////// Helpers
 
   /**
-   * Normalizes the raw type sets the normalized type using the following logic:
-   *
-   *    * Preceeding backslashes are removed from classes and interfaces.
-   *    * Aliases are normalized into proper types,
-   *    * Shapes are normalized into their base type, and the shape property is set to a Shape object
-   *
-   * @param \Reflector|null $reflector
-   *
-   * @return string
-   */
-  protected function doNormalize(\Reflector $reflector = null): string
-  {
-    if ($this->hasNamespace())
-    {
-      $this->normalized = $this->raw;
-      if ('\\' == substr($this->normalized, 0, 1))
-      {
-        return $this->normalized = trim($this->normalized, '\\');
-      }
-    }
-
-    if (!$this->isLower() && class_exists('\\' . $this->raw))
-    {
-      return $this->normalized = $this->raw;
-    }
-
-    if (in_array($this->raw, [self::SELF, self::STATIC, self::THIS]))
-    {
-      if ($reflector instanceof \ReflectionClass)
-      {
-        return $this->normalized = $reflector->getName();
-      }
-    }
-
-    foreach(self::ALIAS as $pattern => $type)
-    {
-      if (preg_match('#' . $pattern . '#', $type))
-      {
-        return $this->normalized = $type;
-      }
-    }
-
-    foreach(self::SHAPE as $pattern => $type)
-    {
-      if (preg_match('#' . $pattern . '#', $type, $m))
-      {
-        $this->shape = Shape::tryFrom($m[1], $reflector);
-
-        return $this->normalized = $type;
-      }
-    }
-
-    return $this->normalized = $this->raw;
-  }
-
-  /**
    * Retrieves an array of types from the type group string, which must be one of the existing interfaces.
    *
    * @param string $type
    *
    * @return string[]
-   * @throws \ReflectionException
    */
   private static function getTypes(string $type): array
   {
@@ -386,7 +366,7 @@ class Type implements Builtins, Aliases, Shapes, Reference
     {
       if (!isset(static::$types[$type]))
       {
-        static::$types[$type] = array_flip((new \Reflectionclass($type))->getConstants());
+        static::$types[$type] = array_flip((new \ReflectionClass($type))->getConstants());
       }
 
       return static::$types[$type];

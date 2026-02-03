@@ -7,9 +7,10 @@ use DevCoding\Reflection\Exceptions\TagNotFoundException;
 use DevCoding\Reflection\Tags\ReflectionParamTag;
 use DevCoding\Reflection\Tags\ReflectionTag;
 use DevCoding\Reflection\Tags\TagGroup;
-use DevCoding\Reflection\Vars\ReflectionNamedVar;
-use DevCoding\Reflection\Vars\ReflectionUnionVar;
-use DevCoding\Reflection\Vars\ReflectionVar;
+use DevCoding\Reflection\Types\Base\CompoundInterface;
+use DevCoding\Reflection\Types\Base\ShapeInterface;
+use DevCoding\Reflection\Types\Type;
+use DevCoding\Reflection\Types\Union;
 
 /**
  * Reflection-style object representing the DocComment of a ReflectionFunctionAbstract
@@ -59,11 +60,11 @@ class ReflectionFunctionComment extends ReflectionComment
   }
 
   /**
-   * @return ReflectionUnionVar|ReflectionNamedVar
+   * @return Type
    */
-  public function getReturnType(): ReflectionVar
+  public function getReturnType(): Type
   {
-    return ($r = $this->getReturn()) ? $r->type : new ReflectionNamedVar($this->reflector, 'mixed');
+    return ($r = $this->getReturn()) ? $r->type : Type::tryFrom('mixed', $this->reflector);
   }
 
   /**
@@ -148,7 +149,7 @@ class ReflectionFunctionComment extends ReflectionComment
   }
 
   /**
-   * @param ReflectionNamedVar|ReflectionUnionVar $type
+   * @param Type $type
    * @param array $imports
    *
    * @return $this
@@ -157,11 +158,33 @@ class ReflectionFunctionComment extends ReflectionComment
   {
     if (isset($type))
     {
-      $types = $type instanceof ReflectionUnionVar ? $type->getTypes() : [$type];
-      foreach($types as $type)
+      if ($type instanceof Union)
       {
-        /** @var ReflectionNamedVar $type */
-        $imports[$type->getName()] = true;
+        foreach($type as $t)
+        {
+          $this->addImports($t, $imports);
+        }
+      }
+      elseif ($type instanceof CompoundInterface)
+      {
+        $this->addImports($type->inner(),$imports);
+      }
+      else
+      {
+        $imports[(string) $type] = true;
+      }
+
+      if ($type instanceof ShapeInterface)
+      {
+        $definition = $type->getShape();
+
+        foreach($definition as $item)
+        {
+          if ($item instanceof Type)
+          {
+            $this->addImports($item, $imports);
+          }
+        }
       }
     }
 

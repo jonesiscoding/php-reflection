@@ -3,7 +3,7 @@
 namespace DevCoding\Reflection\Comments;
 
 use DevCoding\Reflection\Tags\ReflectionTag;
-use DevCoding\Reflection\Vars\ReflectionVar;
+use DevCoding\Reflection\Types\Type;
 
 /**
  * Reflection-style object representing the DocComment of a ReflectionProperty
@@ -32,9 +32,9 @@ class ReflectionPropertyComment extends ReflectionComment
   }
 
   /**
-   * @return ReflectionVar
+   * @return Type
    */
-  public function getType(): ReflectionVar
+  public function getType(): Type
   {
     return $this->getVar()->type;
   }
