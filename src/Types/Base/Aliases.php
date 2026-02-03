@@ -27,7 +27,6 @@ interface Aliases
     '(closed|open)\-resource'            => 'resource',
     'pure\-callable'                     => 'callable',
     'callable\-(array|string)'           => 'callable',
-    'callable\-array'                    => 'callable',
     'never(\-return[s])'                 => 'never',
     'no\-return'                         => 'never',
   ];
