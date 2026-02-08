@@ -159,7 +159,7 @@ class ReflectionContext
    */
   public function __call($name, $arguments)
   {
-    if (is_callable([$this->context, $name]))
+    if (method_exists($this->context, $name))
     {
       return $this->context->$name(...$arguments);
     }
