@@ -9,7 +9,7 @@ use DevCoding\Reflection\Types\Nullable;
  * @method Type __get($name)
  * @method \ArrayIterator|Type[] getIterator()
  */
-class Map extends ShapeDefinition implements DefinitionInterface
+class Map extends ShapeDefinition
 {
   public static function pattern(string $type = 'array|object'): string
   {
