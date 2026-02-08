@@ -62,7 +62,7 @@ abstract class Type implements Builtins, Aliases, Reference, TypeInterface
    * @return self
    * @throws \ReflectionException
    */
-  public static function from(string $string, \Reflector $context = null, &$matches = [])
+  public static function from(string $string, \Reflector $context = null, &$matches = []): Type
   {
     $matches = [];
     $factory = static::$factory = static::$factory ?? new Factory();
@@ -87,7 +87,7 @@ abstract class Type implements Builtins, Aliases, Reference, TypeInterface
     return $object;
   }
 
-  public static function fromReflector(\Reflector $reflector)
+  public static function fromReflector(\Reflector $reflector): Type
   {
     $factory = static::$factory = static::$factory ?? new Factory();
 
