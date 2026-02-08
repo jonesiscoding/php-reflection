@@ -13,7 +13,7 @@ class Map extends ShapeDefinition
 {
   public static function pattern(string $type = 'array|object'): string
   {
-    return '#(?<type>'.$type.'){(?<inner>([^}]+)}$#';
+    return '#(?<type>'.$type.'){(?<inner>[^}]+)}$#';
   }
 
   public static function match(string $string, \Reflector $context = null, array &$matches = []): bool

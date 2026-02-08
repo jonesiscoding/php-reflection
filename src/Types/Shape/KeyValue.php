@@ -9,7 +9,7 @@ class KeyValue extends ShapeDefinition
 {
   public static function pattern(string $type = 'array'): string
   {
-    return '#(?<type>' . $type . ')<(?<inner>([^>]+)>$#';
+    return '#(?<type>' . $type . ')<(?<inner>[^>]+)>$#';
   }
 
   /**
