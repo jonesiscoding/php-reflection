@@ -8,7 +8,7 @@ namespace DevCoding\Reflection\Tags;
  */
 class ReflectionParamTag extends ReflectionTag implements NamedTagInterface
 {
-  public function __construct(\ReflectionMethod $class, string $contents)
+  public function __construct(\ReflectionMethod $method, string $contents)
   {
     $property = ['tag' => 'param'];
     if (preg_match(self::STANDARD, $contents, $tag))
@@ -18,7 +18,7 @@ class ReflectionParamTag extends ReflectionTag implements NamedTagInterface
       $property['description'] = $tag['description'];
     }
 
-    parent::__construct($class, array_filter($property));
+    parent::__construct($method, array_filter($property));
   }
 
   public function getName(): string
