@@ -27,6 +27,7 @@ trait ShapeTrait
 
   protected static function matchShape(string $string, \Reflector $context = null, array &$matches = []): bool
   {
+    static::initializeShapeTypes();
     foreach(static::$shapes as $shape)
     {
       /** @var ShapeDefinition $shape */
