@@ -42,21 +42,7 @@ class ReflectionClassName extends ReflectionString
   {
     if (!isset($this->short))
     {
-      try
-      {
-        if ($this->reflector instanceof \ReflectionClass)
-        {
-          $this->short = $this->reflector->getShortName();
-        }
-        else
-        {
-          $this->short = (ReflectionContext::from($this->reflector))->getShortName();
-        }
-      }
-      catch (\Exception $e)
-      {
-        $this->short = substr(strrchr($this->string, '\\'), 1);
-      }
+      list($this->namespace, $this->short) = static::explodeClass($this->string);
     }
 
     return $this->short;
@@ -71,21 +57,7 @@ class ReflectionClassName extends ReflectionString
   {
     if (!isset($this->namespace))
     {
-      try
-      {
-        if ($this->reflector instanceof \ReflectionClass)
-        {
-          $this->namespace = $this->reflector->getNamespaceName();
-        }
-        else
-        {
-          $this->namespace = (ReflectionContext::from($this->reflector))->getNamespaceName();
-        }
-      }
-      catch (\Exception $e)
-      {
-        $this->namespace = str_replace($this->getName().'\\', '', $this->string);
-      }
+      list($this->namespace, $this->short) = static::explodeClass($this->string);
     }
 
     return $this->namespace;
