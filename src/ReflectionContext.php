@@ -161,7 +161,7 @@ class ReflectionContext
   {
     if (is_callable([$this->context, $name]))
     {
-      $this->context->$name(...$arguments);
+      return $this->context->$name(...$arguments);
     }
 
     return $this->$name(...$arguments);
