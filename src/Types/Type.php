@@ -67,7 +67,7 @@ abstract class Type implements Builtins, Aliases, Reference, TypeInterface
     $matches = [];
     $factory = static::$factory = static::$factory ?? new Factory();
     $class   = $factory->match($string, $context, $matches);
-    $type    = $matches['type'] ?? $string;
+    $type    = !empty($matches['type']) ? $matches['type'] : $string;
     $object  = new $class($type, $context);
 
     if ($object instanceof VariableInterface && isset($matches['type']))
