@@ -12,7 +12,7 @@ class Nullable extends Compound
   public static function match(string $string, \Reflector $context = null, array &$matches = []): bool
   {
     $pipes = substr_count($string, '|');
-    if ($pipes <= 1)
+    if ($pipes <= 1 && static::NULL !== $string)
     {
       if (false !== strpos($string, 'null'))
       {
