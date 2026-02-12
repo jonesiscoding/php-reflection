@@ -14,12 +14,7 @@
             "DevCoding\\Reflection\\": "src/"
         }
     },
-    "version": "1.70.1",
-    "config": {
-        "platform": {
-            "php": "7.0.33"
-        }
-    },
+    "version": "70.2",
     "require": {
         "php": ">=7.0",
         "psr/container": "^1.0 || ^2.0",

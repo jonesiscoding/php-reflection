@@ -10,16 +10,12 @@ which can be used to parse and retrieve individual tags from the PHPdoc comment.
 Tags are returned as a `ReflectionTag`.  In cases where tags may repeat such as `@property`, `@method` or `@param`, a
 `TagBag` is returned.
 
-## ReflectionVar Classes
+## Type Classes
 
 Similar to ReflectionType, this class provides information on a type, such as a property type, parameter type, or method 
-return type. Unlike ReflectionType, the data for a ReflectionVar can be pulled from the DocComment of the related
+return type. Unlike ReflectionType, the data for a Type can be pulled from the DocComment of the related
 reflection object.
 
-Multiple types are presented as a `ReflectionUnionVar`, and singular types are presented as a `ReflectionNamedVar`, in
-the same manner as PHP 7.1+.
-
-In cases where a PHPdoc indicates an array of a specific type, a `ReflectionPrototypeVar` is used to indicate this.
 
 ## ReflectionTag Classes
 
