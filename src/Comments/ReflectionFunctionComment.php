@@ -169,7 +169,7 @@ class ReflectionFunctionComment extends ReflectionComment
       {
         $this->addImports($type->inner(),$imports);
       }
-      else
+      elseif(!$type->isBuiltin())
       {
         $imports[(string) $type] = true;
       }
