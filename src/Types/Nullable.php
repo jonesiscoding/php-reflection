@@ -16,19 +16,19 @@ class Nullable extends Compound
     {
       if (false !== strpos($string, 'null'))
       {
-        $matches[Factory::TYPE] = trim(str_replace('null', '', $string), '|?');
+        $matches[Factory::INNER] = trim(str_replace('null', '', $string), '|?');
       }
       elseif (0 === $pipes && str_starts_with($string, '?'))
       {
-        $matches[Factory::TYPE] = substr($string, 1);
+        $matches[Factory::INNER] = substr($string, 1);
       }
-      elseif (static::isNullableContext($context))
+      elseif ($context && static::isNullableContext($context))
       {
-        $matches[Factory::TYPE] = $string;
+        $matches[Factory::INNER] = $string;
       }
     }
 
-    return isset($matches[Factory::TYPE]);
+    return isset($matches[Factory::INNER]);
   }
 
   /**
