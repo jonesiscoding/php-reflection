@@ -29,6 +29,7 @@ class Factory
 
   /** @var class-string<TypeInterface|CompoundInterface>[] */
   public $types;
+  protected $resolving;
 
   /**
    * @param array $types
@@ -76,7 +77,16 @@ class Factory
       throw new NonMatchingTypeStringException((string) $object->raw());
     }
 
-    $object->setInner(Type::from($data['inner'], $context));
+    if ($object instanceof Nullable)
+    {
+      $this->resolving = $data['inner'];
+    }
+
+    $inner = Type::from($data['inner'], $context);
+
+    $this->resolving = null;
+
+    $object->setInner($inner);
   }
 
   /**
@@ -86,12 +96,17 @@ class Factory
    * @return string
    * @throws NonMatchingTypeStringException
    */
-  public function match(string &$string, \Reflector $context = null, array &$matches = []): string
+  public function match(string $string, \Reflector $context = null, array &$matches = []): string
   {
-    $string  = $this->normalize($string);
-    $matches = $matches ?? new Match();
+    $string = $this->normalize($string, $context);
+
     foreach($this->types as $type)
     {
+      if (Nullable::class === $type && $string === $this->resolving)
+      {
+        continue;
+      }
+
       /** @var TypeInterface|CompoundInterface $type */
       if ($type::match($string, $context, $matches))
       {
