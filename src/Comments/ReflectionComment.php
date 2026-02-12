@@ -1,4 +1,5 @@
 <?php
+
 /** @noinspection PhpMultipleClassDeclarationsInspection */
 
 namespace DevCoding\Reflection\Comments;
@@ -130,29 +131,32 @@ class ReflectionComment implements \Stringable
    *
    * @return array
    */
-  protected function extractSummary(string $doc)
+  protected function extractSummary(string $doc): array
   {
     $comment = preg_replace('/(^\/[\*]{1,2}\n*|\s?\*\/\s*$)/m', '', $doc);
-    $retval  = ['tag' => 'summary'];
-    if(preg_match_all('/^\s*(?:(?:\/\*)?\*\s*)?([^@\s\/*].*?|$)\r?$/m', $comment, $matches))
+    if(preg_match_all('/^\s*(?:(?:\/\*)?\*\s*)?([^@\s\/*].*?|$)\r?$/m', $comment, $matches, PREG_PATTERN_ORDER))
     {
       if (!empty($matches[1]))
       {
+        $retval  = ['tag' => 'summary'];
         $matches = $matches[1];
-
-        if (count($matches) > 2)
+        if (!empty($matches[0]) && empty($matches[1]))
         {
-          if (!empty($matches[1]) && empty($matches[2]))
-          {
-            $retval['summary'] = array_shift($matches);
-          }
+          $retval['summary'] = array_shift($matches);
 
+          array_shift($matches);
+        }
+
+        if (!empty($matches))
+        {
           $retval['description'] = trim(implode(' ', $matches));
         }
+
+        return $retval;
       }
     }
 
-    return $retval;
+    return [];
   }
 
   /**
