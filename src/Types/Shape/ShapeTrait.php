@@ -42,7 +42,7 @@ trait ShapeTrait
     return false;
   }
 
-  public function getShape(): ShapeDefinition
+  public function getShape()
   {
     return $this->shape;
   }

@@ -8,7 +8,10 @@ interface ShapeInterface
 {
   public static function addShapeDefinition(string $shapeClass);
 
-  public function getShape(): ShapeDefinition;
+  /**
+   * @return ShapeDefinition|null
+   */
+  public function getShape();
 
   public function setShape(ShapeDefinition $shape): ShapeInterface;
 }

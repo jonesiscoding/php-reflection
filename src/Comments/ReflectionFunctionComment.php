@@ -176,13 +176,14 @@ class ReflectionFunctionComment extends ReflectionComment
 
       if ($type instanceof ShapeInterface)
       {
-        $definition = $type->getShape();
-
-        foreach($definition as $item)
+        if ($definition = $type->getShape())
         {
-          if ($item instanceof Type)
+          foreach($definition as $item)
           {
-            $this->addImports($item, $imports);
+            if ($item instanceof Type)
+            {
+              $this->addImports($item, $imports);
+            }
           }
         }
       }
