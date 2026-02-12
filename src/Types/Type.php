@@ -28,7 +28,7 @@ abstract class Type implements Builtins, Aliases, Reference, TypeInterface
   /** @var Factory */
   protected static $factory;
   /** @var array */
-  private static $types;
+  protected static $types;
   /** @var string */
   protected $normalized;
   /** @var string */
