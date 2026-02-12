@@ -16,7 +16,7 @@ class Object extends Type implements TypeInterface
       {
         $matches['type'] = $string;
       }
-      elseif ($resolved = ReflectionContext::from($context)->tryResolve($string))
+      elseif ($resolved = ReflectionContext::from($context)->resolve($string))
       {
         $matches['type'] = $resolved;
       }

@@ -32,7 +32,7 @@ class ReflectionTag extends \ArrayIterator
   {
     if ($t = $tag['type'] ?? null)
     {
-      $tag['type'] = Type::tryFrom($t);
+      $tag['type'] = Type::from($t, $reflector);
     }
 
     if ($params = $tag['params'] ?? null)

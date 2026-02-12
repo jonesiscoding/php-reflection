@@ -64,7 +64,7 @@ class ReflectionFunctionComment extends ReflectionComment
    */
   public function getReturnType(): Type
   {
-    return ($r = $this->getReturn()) ? $r->type : Type::tryFrom('mixed', $this->reflector);
+    return ($r = $this->getReturn()) ? $r->type : Type::from('mixed', $this->reflector);
   }
 
   /**
