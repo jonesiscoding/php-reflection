@@ -50,7 +50,7 @@ class ReflectionString implements \Reflector
     $this->string = $string;
 
     if (preg_match(
-      '^([a-zA-Z_\x21-\x7E][a-zA-Z0-9_\x21-\x7E]*)((?:->|::))(\$?[a-zA-Z_\x21-\x7E][a-zA-Z0-9_\x21-\x7E]*)\(?.*\)?)?$',
+      '#^([a-zA-Z_\x21-\x7E][a-zA-Z0-9_\x21-\x7E]*)((?:->|::))(\$?[a-zA-Z_\x21-\x7E][a-zA-Z0-9_\x21-\x7E]*)(\(?.*\)?)?$#',
       $this->string,
       $m
     ))
