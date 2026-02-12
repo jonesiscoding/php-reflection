@@ -20,7 +20,7 @@ use DevCoding\Reflection\Types\Type;
  */
 class ReflectionTag extends \ArrayIterator
 {
-  const STANDARD     = "#@(?<tag>var|param|property)\s+(?<type>[^\s]+)(?:\s+(?<name>\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*))?(?:\s+(?<description>.+))?#";
+  const STANDARD     = '#@(?<tag>var|param|property)\s+(?<type>[^\s\$]+)?\s*(?:\$(?<name>[^\s]+))?(?:\s+(?<description>.+))?#';
   const METHOD       = '#@(?<tag>method)\s+(?:(?<static>static)\s+)?(?:(?<type>\S+)\s+)?(?<name>\w+)\((?<params>[^\)]+)?\)(?:\s+(?<description>.*))?#';
   const METHOD_PARAM = '#^(?:(?<type>[^$]+)\s+)?\$(?<name>\w+)(?:\s*=\s*(?<default>"[^"]+"|\[[^\]]+\]|[^,]+))?$#';
 
