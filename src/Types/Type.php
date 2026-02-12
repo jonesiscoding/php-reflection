@@ -52,6 +52,15 @@ abstract class Type implements Builtins, Aliases, Reference, TypeInterface
   }
 
   /**
+   * @param Factory $factory
+   * @return void
+   */
+  public static function setFactory(Factory $factory)
+  {
+    static::$factory = $factory;
+  }
+
+  /**
    * Instantiates a type from the given string and optional context, throwing an exception if the type cannot be
    * identified or resolved.
    *
