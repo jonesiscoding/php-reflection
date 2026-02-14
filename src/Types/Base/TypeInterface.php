@@ -3,6 +3,7 @@
 namespace DevCoding\Reflection\Types\Base;
 
 use DevCoding\Reflection\Types\Factory\Match;
+use DevCoding\Reflection\Types\Type;
 
 /**
  * Interface for object classes describing a PHP type
@@ -13,6 +14,14 @@ use DevCoding\Reflection\Types\Factory\Match;
  */
 interface TypeInterface extends \Stringable
 {
+  /**
+   * MUST evaluate if the given comparison equals the type described by this object.
+   *
+   * @param  Type|string $comp
+   * @return bool
+   */
+  public function equals($comp): bool;
+
   /**
    * MUST evaluate if the given string and Reflector can be described by this type.
    * MUST populate the given $matches argument with applicable match data

@@ -2,6 +2,7 @@
 
 namespace DevCoding\Reflection\Types;
 
+use DevCoding\Reflection\Types\Base\CompoundInterface;
 use DevCoding\Reflection\Types\Base\TypeInterface;
 use DevCoding\Reflection\Types\Factory\Match;
 
@@ -23,6 +24,21 @@ class Union extends Type implements \IteratorAggregate, TypeInterface
 
     $this->iterator = new \ArrayIterator($parts);
     $this->raw      = $raw;
+  }
+
+  /**
+   * @param  TypeInterface|string $comp
+   * @return bool
+   */
+  public function equals($comp): bool
+  {
+    $comp = explode('|', (string) $comp);
+    $self = explode('|', (string) $this);
+
+    $diff1 = array_diff($comp, $self);
+    $diff2 = array_diff($self, $comp);
+
+    return empty($diff1) && empty($diff2);
   }
 
   public static function match(string $string, \Reflector $context = null, array &$matches = []): bool

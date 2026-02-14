@@ -15,12 +15,22 @@ abstract class Compound extends Type implements CompoundInterface
   /** @var Type The real Type */
   protected $inner;
 
+  /**
+   * @param $comp
+   * @return bool
+   */
+  public function equals($comp): bool
+  {
+    return $this->inner()->equals($comp);
+  }
+
   public function setInner(Type $type): CompoundInterface
   {
     $this->inner = $type;
 
     return $this;
   }
+
 
   /**
    * @param string                                            $string

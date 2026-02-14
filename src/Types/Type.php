@@ -210,6 +210,20 @@ abstract class Type implements Builtins, Aliases, Reference, TypeInterface
   }
 
   /**
+   * @param TypeInterface|string $comp
+   * @return bool
+   */
+  public function equals($comp): bool
+  {
+    if ($comp instanceof CompoundInterface)
+    {
+      return (string) $this === (string) $comp->inner();
+    }
+
+    return (string) $this === (string) $comp;
+  }
+
+  /**
    * If this type is a class or interface, returns the short name.
    * If this type is an aliased or builtin type, returns the normalized type.
    *
