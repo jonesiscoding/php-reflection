@@ -11,7 +11,7 @@ use DevCoding\Reflection\Types\Factory\Match;
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
-interface TypeInterface
+interface TypeInterface extends \Stringable
 {
   /**
    * MUST evaluate if the given string and Reflector can be described by this type.
