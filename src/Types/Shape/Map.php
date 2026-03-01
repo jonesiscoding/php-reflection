@@ -2,11 +2,12 @@
 
 namespace DevCoding\Reflection\Types\Shape;
 
+use DevCoding\Reflection\Types\Base\TypeInterface;
 use DevCoding\Reflection\Types\Nullable;
 
 /**
- * @method Type offsetGet($offset)
- * @method Type __get($name)
+ * @method TypeInterface offsetGet($offset)
+ * @method TypeInterface __get($name)
  * @method \ArrayIterator|Type[] getIterator()
  */
 class Map extends ShapeDefinition

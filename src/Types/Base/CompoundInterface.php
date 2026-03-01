@@ -2,11 +2,9 @@
 
 namespace DevCoding\Reflection\Types\Base;
 
-use DevCoding\Reflection\Types\Type;
-
-interface CompoundInterface extends TypeInterface
+interface CompoundInterface extends ContainsInterface
 {
-  public function setInner(Type $type): CompoundInterface;
+  public function setInner(TypeInterface $type): CompoundInterface;
 
-  public function inner(): Type;
+  public function inner(): TypeInterface;
 }
