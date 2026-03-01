@@ -2,8 +2,8 @@
 
 namespace DevCoding\Reflection\Types\Base;
 
+use DevCoding\Reflection\Base\EquatableInterface;
 use DevCoding\Reflection\Types\Factory\Match;
-use DevCoding\Reflection\Types\Type;
 
 /**
  * Interface for object classes describing a PHP type
@@ -12,15 +12,12 @@ use DevCoding\Reflection\Types\Type;
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
-interface TypeInterface extends \Stringable
+interface TypeInterface extends EquatableInterface
 {
   /**
-   * MUST evaluate if the given comparison equals the type described by this object.
-   *
-   * @param  Type|string $comp
-   * @return bool
+   * @return string
    */
-  public function equals($comp): bool;
+  public function __toString();
 
   /**
    * MUST evaluate if the given string and Reflector can be described by this type.
