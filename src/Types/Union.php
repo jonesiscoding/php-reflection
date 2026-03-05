@@ -26,20 +26,7 @@ class Union extends Type implements \IteratorAggregate, TypeInterface
     $this->raw      = $raw;
   }
 
-  /**
-   * @param  Union|string $value
-   * @return bool
-   */
-  public function equals($value): bool
-  {
-    $value = explode('|', (string) $value);
-    $self  = explode('|', (string) $this);
-
-    $diff1 = array_diff($value, $self);
-    $diff2 = array_diff($self, $value);
-
-    return empty($diff1) && empty($diff2);
-  }
+  // region //////////////////////////////////////////////// Public Functions
 
   public static function match(string $string, \Reflector $context = null, array &$matches = []): bool
   {
@@ -60,4 +47,25 @@ class Union extends Type implements \IteratorAggregate, TypeInterface
   {
     return true;
   }
+
+  // endregion ///////////////////////////////////////////// End Public
+
+  // region //////////////////////////////////////////////// Equatable Interface
+
+  /**
+   * @param  Union|string $value
+   * @return bool
+   */
+  public function equals($value): bool
+  {
+    $value = explode('|', (string) $value);
+    $self  = explode('|', (string) $this);
+
+    $diff1 = array_diff($value, $self);
+    $diff2 = array_diff($self, $value);
+
+    return empty($diff1) && empty($diff2);
+  }
+
+  // endregion ///////////////////////////////////////////// End EquatableInterface
 }

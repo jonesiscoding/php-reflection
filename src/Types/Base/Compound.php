@@ -15,22 +15,8 @@ abstract class Compound extends Type implements CompoundInterface
   /** @var Type The real Type */
   protected $inner;
 
-  /**
-   * @param  CompoundInterface|string $value
-   * @return bool
-   */
-  public function equals($value): bool
-  {
-    return $this->inner()->equals($value);
-  }
 
-  public function setInner(TypeInterface $type): CompoundInterface
-  {
-    $this->inner = $type;
-
-    return $this;
-  }
-
+  // region //////////////////////////////////////////////// Abstract Functions
 
   /**
    * @param string                                            $string
@@ -41,6 +27,23 @@ abstract class Compound extends Type implements CompoundInterface
    */
   abstract public static function match(string $string, \Reflector $context = null, array &$matches = []): bool;
 
+  // endregion ///////////////////////////////////////////// End Abstract Functions
+
+  // region //////////////////////////////////////////////// Equatable Interface
+
+  /**
+   * @param  CompoundInterface|string $value
+   * @return bool
+   */
+  public function equals($value): bool
+  {
+    return $this->inner()->equals($value);
+  }
+
+  // endregion ///////////////////////////////////////////// End Equatable Interface
+
+  // region //////////////////////////////////////////////// CompoundInterface
+
   /**
    * Returns the inner type object.
    *
@@ -50,4 +53,13 @@ abstract class Compound extends Type implements CompoundInterface
   {
     return $this->inner;
   }
+
+  public function setInner(TypeInterface $type): CompoundInterface
+  {
+    $this->inner = $type;
+
+    return $this;
+  }
+
+  // endregion ///////////////////////////////////////////// End CompoundInterface
 }

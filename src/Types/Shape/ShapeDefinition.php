@@ -15,6 +15,8 @@ abstract class ShapeDefinition implements \ArrayAccess, \IteratorAggregate
   /** @var \ArrayIterator */
   protected $iterator;
 
+  // region //////////////////////////////////////////////// Abstract Functions
+
   /**
    * MUST evaluate the given string and context to determine if they match the ShapeDefinition.
    * MUST return shape data in the $matches array if matched
@@ -29,6 +31,10 @@ abstract class ShapeDefinition implements \ArrayAccess, \IteratorAggregate
   abstract public static function match(string $string, \Reflector $context = null, array &$matches = []): bool;
 
   abstract public static function pattern(string $type = null): string;
+
+  // endregion ///////////////////////////////////////////// End Abstract Functions
+
+  // region //////////////////////////////////////////////// Iterator & Array
 
   /**
    * @return \ArrayIterator
@@ -67,4 +73,6 @@ abstract class ShapeDefinition implements \ArrayAccess, \IteratorAggregate
 
     return $this->{$name};
   }
+
+  // endregion ///////////////////////////////////////////// End Iterator & Array
 }
