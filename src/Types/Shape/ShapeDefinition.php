@@ -2,6 +2,8 @@
 
 namespace DevCoding\Reflection\Types\Shape;
 
+use DevCoding\Reflection\Types\Base\ContainsInterface;
+use DevCoding\Reflection\Types\Base\TypeInterface;
 use DevCoding\Reflection\Types\Factory\Match;
 
 /**
@@ -10,7 +12,7 @@ use DevCoding\Reflection\Types\Factory\Match;
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/php-reflection/blob/main/LICENSE
  */
-abstract class ShapeDefinition implements \ArrayAccess, \IteratorAggregate
+abstract class ShapeDefinition implements ContainsInterface, \ArrayAccess, \IteratorAggregate
 {
   /** @var \ArrayIterator */
   protected $iterator;
@@ -75,4 +77,59 @@ abstract class ShapeDefinition implements \ArrayAccess, \IteratorAggregate
   }
 
   // endregion ///////////////////////////////////////////// End Iterator & Array
+
+  // region //////////////////////////////////////////////// ContainsInterface
+
+  /**
+   * @param TypeInterface $find
+   * @return bool
+   */
+  public function contains(TypeInterface $find): bool
+  {
+    foreach($this as $value)
+    {
+      if ($value instanceof TypeInterface)
+      {
+        if ($value instanceof ContainsInterface && $value->contains($find))
+        {
+          return true;
+        }
+
+        if ($value->equals($find))
+        {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  public function replace(TypeInterface $find, TypeInterface $repl)
+  {
+    if ($this->contains($find))
+    {
+      $clone = clone $this;
+      foreach($clone as $key => $value)
+      {
+        if ($value instanceof TypeInterface)
+        {
+          if ($value instanceof ContainsInterface)
+          {
+            $clone->offsetSet($key, $value->replace($find, $repl));
+          }
+          elseif ($value->equals($find))
+          {
+            $clone->offsetSet($key, $repl);
+          }
+        }
+      }
+
+      return $clone;
+    }
+
+    return $this;
+  }
+
+  // endregion ///////////////////////////////////////////// End ContainsInterface
 }

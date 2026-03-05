@@ -4,7 +4,7 @@ namespace DevCoding\Reflection\Types\Base;
 
 use DevCoding\Reflection\Types\Shape\ShapeDefinition;
 
-interface ShapeInterface
+interface ShapeInterface extends ContainsInterface
 {
   public static function addShapeDefinition(string $shapeClass);
 

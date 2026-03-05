@@ -12,9 +12,10 @@ use DevCoding\Reflection\Types\Type;
  */
 abstract class Compound extends Type implements CompoundInterface
 {
+  use ContainsTrait;
+
   /** @var Type The real Type */
   protected $inner;
-
 
   // region //////////////////////////////////////////////// Abstract Functions
 

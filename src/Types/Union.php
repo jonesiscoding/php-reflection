@@ -2,11 +2,11 @@
 
 namespace DevCoding\Reflection\Types;
 
-use DevCoding\Reflection\Types\Base\CompoundInterface;
+use DevCoding\Reflection\Types\Base\ContainsInterface;
 use DevCoding\Reflection\Types\Base\TypeInterface;
 use DevCoding\Reflection\Types\Factory\Match;
 
-class Union extends Type implements \IteratorAggregate, TypeInterface
+class Union extends Type implements \IteratorAggregate, TypeInterface, ContainsInterface
 {
   /** @var \ArrayIterator */
   protected $iterator;
@@ -68,4 +68,47 @@ class Union extends Type implements \IteratorAggregate, TypeInterface
   }
 
   // endregion ///////////////////////////////////////////// End EquatableInterface
+
+  // region //////////////////////////////////////////////// ContainsInterface
+
+  public function contains(TypeInterface $find): bool
+  {
+    foreach($this->getIterator() as $type)
+    {
+      if ($type->equals($find))
+      {
+        return true;
+      }
+
+      if ($type instanceof ContainsInterface && $type->contains($find))
+      {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public function replace(TypeInterface $find, TypeInterface $repl)
+  {
+    $copy = $this->getIterator()->getArrayCopy();
+    foreach($copy as $offset => $type)
+    {
+      if ($type->equals($find))
+      {
+        $clone = $clone ?? clone $this;
+        $clone->getIterator()->offsetSet($offset, $repl);
+      }
+
+      if ($type instanceof ContainsInterface && $type->contains($find))
+      {
+        $clone = $clone ?? clone $this;
+        $clone->getIterator()->offsetSet($offset, $type->replace($find, $repl));
+      }
+    }
+
+    return $clone ?? $this;
+  }
+
+  // endregion ///////////////////////////////////////////// End ContainsInterface
 }
