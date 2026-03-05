@@ -24,7 +24,7 @@ abstract class Compound extends Type implements CompoundInterface
     return $this->inner()->equals($value);
   }
 
-  public function setInner(Type $type): CompoundInterface
+  public function setInner(TypeInterface $type): CompoundInterface
   {
     $this->inner = $type;
 
@@ -46,7 +46,7 @@ abstract class Compound extends Type implements CompoundInterface
    *
    * @return Type The inner Type object
    */
-  public function inner(): Type
+  public function inner(): TypeInterface
   {
     return $this->inner;
   }
