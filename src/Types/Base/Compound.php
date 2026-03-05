@@ -16,12 +16,12 @@ abstract class Compound extends Type implements CompoundInterface
   protected $inner;
 
   /**
-   * @param $comp
+   * @param  CompoundInterface|string $value
    * @return bool
    */
-  public function equals($comp): bool
+  public function equals($value): bool
   {
-    return $this->inner()->equals($comp);
+    return $this->inner()->equals($value);
   }
 
   public function setInner(Type $type): CompoundInterface

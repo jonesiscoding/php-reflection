@@ -210,17 +210,17 @@ abstract class Type implements Builtins, Aliases, Reference, TypeInterface
   }
 
   /**
-   * @param TypeInterface|string $comp
+   * @param  TypeInterface|string $value
    * @return bool
    */
-  public function equals($comp): bool
+  public function equals($value): bool
   {
-    if ($comp instanceof CompoundInterface)
+    if ($value instanceof CompoundInterface)
     {
-      return (string) $this === (string) $comp->inner();
+      return (string) $this === (string) $value->inner();
     }
 
-    return (string) $this === (string) $comp;
+    return (string) $this === (string) $value;
   }
 
   /**

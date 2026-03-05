@@ -27,16 +27,16 @@ class Union extends Type implements \IteratorAggregate, TypeInterface
   }
 
   /**
-   * @param  TypeInterface|string $comp
+   * @param  Union|string $value
    * @return bool
    */
-  public function equals($comp): bool
+  public function equals($value): bool
   {
-    $comp = explode('|', (string) $comp);
-    $self = explode('|', (string) $this);
+    $value = explode('|', (string) $value);
+    $self  = explode('|', (string) $this);
 
-    $diff1 = array_diff($comp, $self);
-    $diff2 = array_diff($self, $comp);
+    $diff1 = array_diff($value, $self);
+    $diff2 = array_diff($self, $value);
 
     return empty($diff1) && empty($diff2);
   }
