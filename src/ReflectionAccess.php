@@ -90,7 +90,7 @@ class ReflectionAccess
     }
 
     throw new \ReflectionException(
-        sprintf('%s::%s() has not been implemented.', $this->class->getName(), $this->name->method())
+      sprintf('%s::%s() has not been implemented.', $this->class->getName(), $this->name->method())
     );
   }
 
@@ -114,9 +114,9 @@ class ReflectionAccess
     }
 
     throw new \ReflectionException(sprintf(
-        '%s::%s() has not been implemented.',
-        $this->class->getName(),
-        $this->name->method(ReflectionString::SET)
+      '%s::%s() has not been implemented.',
+      $this->class->getName(),
+      $this->name->method(ReflectionString::SET)
     ));
   }
 
@@ -144,7 +144,7 @@ class ReflectionAccess
     }
 
     throw new \ReflectionException(
-        sprintf('%s::%s is not readable', $this->class->getName(), $this->property->getName())
+      sprintf('%s::%s is not readable', $this->class->getName(), $this->property->getName())
     );
   }
 
@@ -163,7 +163,7 @@ class ReflectionAccess
       if (null === $value && !$this->isNullable())
       {
         throw new \ReflectionException(
-            sprintf('%s::%s is not nullable', $this->class->getName(), $this->property->getName())
+          sprintf('%s::%s is not nullable', $this->class->getName(), $this->property->getName())
         );
       }
 
@@ -180,7 +180,7 @@ class ReflectionAccess
     }
 
     throw new \ReflectionException(
-        sprintf('%s::%s is not writable', $this->class->getName(), $this->property->getName())
+      sprintf('%s::%s is not writable', $this->class->getName(), $this->property->getName())
     );
   }
 

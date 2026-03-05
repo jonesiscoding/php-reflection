@@ -366,7 +366,9 @@ abstract class Type implements Builtins, Aliases, Reference, TypeInterface
    */
   public function raw()
   {
-    $obj      = clone $this;
+    $obj = clone $this;
+
+    // Clear Normalized
     $obj->normalized = null;
 
     return $obj;

@@ -167,7 +167,7 @@ class ReflectionFunctionComment extends ReflectionComment
       }
       elseif ($type instanceof CompoundInterface)
       {
-        $this->addImports($type->inner(),$imports);
+        $this->addImports($type->inner(), $imports);
       }
       elseif(!$type->isBuiltin())
       {

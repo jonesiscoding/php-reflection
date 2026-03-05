@@ -2,7 +2,6 @@
 
 namespace DevCoding\Reflection\Exceptions;
 
-
 use Reflector;
 
 class TagNotFoundException extends NotFoundException

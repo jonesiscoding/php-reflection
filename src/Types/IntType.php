@@ -8,9 +8,9 @@ use DevCoding\Reflection\Types\Shape\ShapeTrait;
 
 class IntType extends Builtin implements ShapeInterface
 {
-  const SHAPES = [MinMax::class];
-
   use ShapeTrait;
+
+  const SHAPES = [MinMax::class];
 
   public static function match(string $string, \Reflector $context = null, array &$matches = []): bool
   {

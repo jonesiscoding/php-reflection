@@ -35,7 +35,7 @@ class Factory
    * @param array $types
    * @param array $shapes
    */
-  public function __construct(array $types = array(), array $shapes = [])
+  public function __construct(array $types = [], array $shapes = [])
   {
     $this->types = [
         Union::class,
@@ -128,7 +128,7 @@ class Factory
     $inner = $data['inner'] ?? null;
     if ($inner && $sCls && is_subclass_of($sCls, ShapeDefinition::class))
     {
-      $shape = array();
+      $shape = [];
       if ($sCls::match($inner, $context, $shape))
       {
         $object->setShape(new $sCls($shape, $context));

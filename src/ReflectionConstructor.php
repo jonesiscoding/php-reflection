@@ -120,7 +120,7 @@ class ReflectionConstructor extends ReflectionTag
     foreach($this->constructor->getParameters() as $parameter)
     {
       // Initialize variable just to keep linter from complaining
-      $arg  = null;
+      $arg = null;
       // Get the name for later use
       $name = $parameter->getName();
       // Start with negative match
@@ -153,7 +153,7 @@ class ReflectionConstructor extends ReflectionTag
       }
     }
 
-    $missing = array_keys(array_filter($matched, function($m) { return $m === false; }));
+    $missing = array_keys(array_filter($matched, function($m) { return false === $m; }));
     if (!empty($missing))
     {
       throw new MissingParameterException($missing);
